@@ -1,6 +1,5 @@
 package com.example.demo.validator;
 
-import com.example.demo.model.Board;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

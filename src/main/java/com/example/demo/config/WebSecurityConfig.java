@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.finalproject.shelter.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,17 +21,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        LogoutConfigurer<HttpSecurity> httpSecurityLogoutConfigurer = http
                 .authorizeRequests()
-                    .antMatchers("/","/account/register","/css/**","/api/**").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
+                .antMatchers("/", "/account/register", "/css/**", "/api/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
                 .formLogin()
-                    .loginPage("/account/login")
-                    .permitAll()
-                    .and()
+                .loginPage("/account/login")
+                .permitAll()
+                .and()
                 .logout()
-                    .permitAll();
+                .permitAll();
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
@@ -38,13 +39,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select username,password,enabled "
+                .usersByUsernameQuery("select identity,password,enabled "
                         + "from user "
-                        + "where username = ?")
-                .authoritiesByUsernameQuery("select u.username, r.name "
+                        + "where identity = ?")
+                .authoritiesByUsernameQuery("select u.identity, r.name "
                         + "from user_role ur inner join user u on ur.user_id "
-                        + "inner join role r on ur.role_id = r.id "
-                        + "where u.username = ?");
+                       + "inner join role r on ur.role_id = r.id "
+                        + "where u.identity = ?");
     }
     //Authentication 로그인 / Authorization 권한
 
