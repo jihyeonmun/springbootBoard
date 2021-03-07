@@ -1,7 +1,8 @@
-package com.example.demo.model;
+package com.finalproject.shelter.model.entity;
 
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -16,25 +17,28 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = "answerList")
+@ToString(exclude = {"categoryList","answerList"})
 @Accessors(chain = true)
 @EntityListeners(AuditingEntityListener.class)
-public class Board {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private Long kakaoId;
+
+    private String userId;
+
+    private String password;
 
     private String name;
 
-    private String content;
+    private String email;
 
-    @CreatedDate
-    private LocalDateTime createdAt;
+    private LocalDateTime lastLoginAt;
 
-    private LocalDateTime uncreatedAt;
+    private int loginFailCount; // integer의 용량 이 int보다 큼 바꿀라면 나중에 바꾸자
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
@@ -42,9 +46,14 @@ public class Board {
     @LastModifiedBy
     private String updatedBy;
 
-    @ManyToOne
-    private Category category;
+    @CreatedDate
+    private LocalDateTime createdAt;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "board")
+    private LocalDateTime uncreatedAt;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "useranwser")
     private List<Answer> answerList;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "usercategory")
+    private List<Category> categoryList;
 }

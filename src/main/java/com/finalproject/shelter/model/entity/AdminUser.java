@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.finalproject.shelter.model.entity;
 
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -9,27 +9,29 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Builder
-@ToString(exclude = "answerList")
 @Accessors(chain = true)
 @EntityListeners(AuditingEntityListener.class)
-public class Board {
+public class AdminUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String userId;
+
+    private String password;
 
     private String name;
 
-    private String content;
+    private LocalDateTime lastLoginAt;
+
+    private int loginFailCount; // integer의 용량 이 int보다 큼 바꿀라면 나중에 바꾸자
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -41,10 +43,4 @@ public class Board {
 
     @LastModifiedBy
     private String updatedBy;
-
-    @ManyToOne
-    private Category category;
-
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "board")
-    private List<Answer> answerList;
 }

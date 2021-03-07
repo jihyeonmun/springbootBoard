@@ -1,6 +1,6 @@
 <html lang="ko"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org/">
 
 <div th:fragment="headerTitle">
     <nav class="navbar">
@@ -9,91 +9,18 @@
             <a href="http://localhost:8080/main">코린이 대피소</a>
         </div>
         <ul class="navbar_menu">
-            <li class="nav-item dropdown" th:classappend="${menu} == 'board'? 'active'">
-                <a class="nav-link dropdown-toggle" href="@{/board/list}" id="dropdown01" data-bs-toggle="dropdown"
-                   aria-expanded="false">언어게시판<span class = "sr-only" th:if="${menu} == 'board'">(current)</span></a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="#">C++/C</a></li>
-                    <li><a class="dropdown-item" href="#">Java/Spring</a></li>
-                    <li><a class="dropdown-item" href="#">Python/django,Flask</a></li>
-                    <li><a class="dropdown-item" href="#">HTML/CSS/JavaScript</a></li>
-                    <li><a class="dropdown-item" href="#">TypeScript/Node.js</a></li>
-                    <li><a class="dropdown-item" href="#">React/Angular/View</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-bs-toggle="dropdown"
-                   aria-expanded="false">에러노트</a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="#">Window</a></li>
-                    <li><a class="dropdown-item" href="#">MAC OS</a></li>
-                    <li><a class="dropdown-item" href="#">LINUX</a></li>
-                    <li><a class="dropdown-item" href="#">IDE</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown"
-                   aria-expanded="false">Best 게시글</a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="#">책</a></li>
-                    <li><a class="dropdown-item" href="#">GitHub</a></li>
-                    <li><a class="dropdown-item" href="#">YouTube</a></li>
-                    <li><a class="dropdown-item" href="#">NaverTv</a></li>
-                    <li><a class="dropdown-item" href="#">NaverBlog/Tistory</a></li>
-                    <li><a class="dropdown-item" href="#">Medium/Brunch/Gitpage/velog</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown"
-                   aria-expanded="false">취업 정보</a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="#">Front-end</a></li>
-                    <li><a class="dropdown-item" href="#">Back-end</a></li>
-                    <li><a class="dropdown-item" href="#">인공지능/머신러닝</a></li>
-                    <li><a class="dropdown-item" href="#">데이터 사이언스</a></li>
-                    <li><a class="dropdown-item" href="#">시스템네트워크/보안/하드웨어</a></li>
-                    <li><a class="dropdown-item" href="#">DevOps</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown05" data-bs-toggle="dropdown"
-                   aria-expanded="false">연구원/회사원</a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="#">Python-데이터분석</a></li>
-                    <li><a class="dropdown-item" href="#">인공지능/머신러닝</a></li>
-                    <li><a class="dropdown-item" href="#">웹개발</a></li>
-                    <li><a class="dropdown-item" href="#">업무 자동화</a></li>
-                    <li><a class="dropdown-item" href="#">업무 툴</a></li>
-                    <li><a class="dropdown-item" href="#">MatLab</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown06" data-bs-toggle="dropdown"
-                   aria-expanded="false">Q&A</a>
-                <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="#">멘토링</a></li>
-                    <li><a class="dropdown-item" href="#">알고리즘/자료구조</a></li>
-                    <li><a class="dropdown-item" href="#">포트폴리오</a></li>
-                    <li><a class="dropdown-item" href="#">기술/실무면접</a></li>
-                    <li><a class="dropdown-item" href="#">이직</a></li>
-                </ul>
-            </li>
+            <li><a href="board">언어게시판</a></li>
+            <li><a href="board">에러 모음집</a></li>
+            <li><a href="board">Best 게시글</a></li>
+            <li><a href="board">취업 정보</a></li>
+            <li><a href="board">연구/회사원</a></li>
+            <li><a href="board">Q&A</a></li>
         </ul>
-        <!--        <ul class="navbar_icons">-->
-        <!--            <li><a href="login"><i class="fas fa-sign-in-alt"></i></a></li>-->
-        <!--            <li><a href="Google"><i class="fab fa-google"></i></a></li>-->
-        <!--            <li><a href="Github"><i class="fab fa-github"></i></a></li>-->
-        <!--        </ul>-->
-        <a class="btn btn-primary my-2 mr-2 my-sm-0" th:href="@{/account/login}"
-           sec:authorize="!isAuthenticated()">로그인</a>
-        <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/account/register}"
-           sec:authorize="!isAuthenticated()">회원가입</a>
-        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
-            <!-- <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"> -->
-            <span class="text-white" sec:authentication="name">사용자</span>
-            <span class="text-white mx-2" sec:authentication="principal.authorities">권한</span>
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Logout</button>
-        </form>
+        <ul class="navbar_icons">
+            <li><a href="login"><i class="fas fa-sign-in-alt"></i></a></li>
+            <li><a href="Google"><i class="fab fa-google"></i></a></li>
+            <li><a href="Github"><i class="fab fa-github"></i></a></li>
+        </ul>
         <a href="#" class = "navbar_toogleBtn">
             <i class="fas fa-list"></i>
         </a>

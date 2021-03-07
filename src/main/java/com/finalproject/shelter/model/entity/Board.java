@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.finalproject.shelter.model.entity;
 
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -29,7 +29,7 @@ public class Board {
 
     private String name;
 
-    private String content;
+    private String contents;
 
     @CreatedDate
     private LocalDateTime createdAt;
