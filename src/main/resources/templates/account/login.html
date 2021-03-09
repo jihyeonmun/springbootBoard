@@ -7,54 +7,30 @@
 <div th:replace="fragment/head :: head"></div>
 <!-- head End-->
 
-
-<body>
-<!--header Start-->
 <div th:replace="fragment/headerTitle ::headerTitle"></div>
-<!--header End-->
 
+<body class = "text-center">
 
-<!-- wrap -->
-<div id="wrap">
-
-    <div id="container">
-        <!-- location_area -->
-
-        <!-- //location_area -->
-
-        <!-- bodytext_area -->
-        <div>
-            <form class="form-signin" th:action="@{/account/login}" method="post">
-                <!--    <a th:href="@{/}"><img class="mb-4" src="/img/logo.png" alt="" width="72" height="72"></a>-->
-                <i class="fas fa-baby" ></i>
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                    Invalid username and password.
-                </div>
-                <div th:if="${param.logout}" class="alert alert-primary" role="alert">
-                    You have been logged out.
-                </div>
-                <label for="identity" class="sr-only">ID</label>
-                <input type="text" id="identity" name="identity" class="form-control" placeholder="identity" required autofocus>
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-                <!-- <div class="checkbox mb-3">
-                  <label>
-                    <input type="checkbox" value="remember-me"> Remember me
-                  </label>
-                </div> -->
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
-            </form>
+    <form class="form-signin"  th:action="@{/account/login}" method="post">
+        <i class="fas fa-baby" ></i>
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <div th:if="${param.error}" class="alert alert-danger" role="alert">
+            Invalid username and password.
         </div>
-        <!-- //bodytext_area -->
+        <div th:if="${param.logout}" class="alert alert-primary" role="alert">
+            You have been logged out.
+        </div>
+        <!--    <a th:href="@{/}"><img class="mb-4" src="/img/logo.png" alt="" width="72" height="72"></a>-->
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
 
-        <div th:replace="fragment/footer"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+    </form>
 
-    </div>
-    <!-- //wrap -->
+    <div th:replace="fragment/footer"/>
     <div th:replace="fragment/sideMenu"/>
-</div>
-
 </body>
 </html>
